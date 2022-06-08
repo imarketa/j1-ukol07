@@ -2,7 +2,7 @@ package cz.czechitas.ukol7;
 
 
 import com.formdev.flatlaf.FlatLightLaf;
-import cz.czechitas.ukol7.controller.PreferenceController;
+import cz.czechitas.ukol7.controller.UpravaController;
 import cz.czechitas.ukol7.view.HlavniOkno;
 import net.miginfocom.swing.MigLayout;
 
