@@ -14,12 +14,18 @@ import java.util.List;
  */
 public class UpravaController {
   public static final List<String> PREZDIVKA = Arrays.asList(
-          "Akim",
+          "Žluťásek",
           "Black",
           "Chilli",
-          "Dean",
-          "Evan"
+          "Modrák"
   );
+  public enum Barva {
+    Zluta,
+    Cerna,
+    Cervena,
+    Modra,
+    ;
+  }
   private final PresentationModel<BarvaBean> model;
   private final Action novyAction;
   private final Action ulozitAction;
