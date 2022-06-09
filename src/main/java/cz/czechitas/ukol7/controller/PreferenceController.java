@@ -9,30 +9,16 @@ import java.beans.PropertyChangeEvent;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- *
- */
-public class UpravaController {
-  public static final List<String> PREZDIVKA = Arrays.asList(
-          "Žluťásek",
-          "Black",
-          "Chilli",
-          "Modrák"
-  );
-  public enum Barva {
-    Zluta,
-    Cerna,
-    Cervena,
-    Modra,
-    ;
-  }
+public class PreferenceController {
   private final PresentationModel<BarvaBean> model;
   private final Action novyAction;
   private final Action ulozitAction;
+  private final String text;
 
-  public UpravaController() {
+  public PreferenceController(String text, Action novyAction) {
+    this.text = text;
+    this.novyAction = novyAction;
     model = new PresentationModel<>(new BarvaBean());
-    novyAction = ActionBuilder.create("&Nový", this::handleNovy);
     ulozitAction = ActionBuilder.create("&Uložit", this::handleUlozit);
     model.addBeanPropertyChangeListener(this::handlePropertyChange);
     vypoctiStavAkci();
@@ -41,6 +27,8 @@ public class UpravaController {
   private void handleUlozit() {
     BarvaBean bean = this.model.getBean();
     System.out.println("-- Ukládám data --");
+    System.out.printf("Přezdívka: %s", bean.getPrezdivka()).println();
+    System.out.printf("Oblíbená barva: %s", bean.getBarva()).println();
   }
 
   private void handlePropertyChange(PropertyChangeEvent propertyChangeEvent) {
@@ -68,5 +56,29 @@ public class UpravaController {
   public void handleNovy() {
     this.model.setBean(new BarvaBean());
   }
-  
+
+  public static final List<String> PREZDIVKA = Arrays.asList(
+          "Žluťásek",
+          "Black",
+          "Chilli",
+          "Modrák"
+  );
+
+  public enum Barva {
+    Zluta("žlutá"),
+    Cerna("černá"),
+    Cervena("červená"),
+    Modra("modrá");
+
+
+    private final String text;
+
+    Barva(String text) {
+      this.text = text;
+    }
+
+    public String getText() {
+      return text;
+    }
+  }
 }
