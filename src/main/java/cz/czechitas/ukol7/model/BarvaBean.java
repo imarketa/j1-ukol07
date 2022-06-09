@@ -15,7 +15,6 @@ public class BarvaBean implements ObservableBean {
   private final ExtendedPropertyChangeSupport pcs = new ExtendedPropertyChangeSupport(this);
 
   private String barva;
-  private String prezdivka;
 
   public String getBarva() {
     return barva;
@@ -27,7 +26,13 @@ public class BarvaBean implements ObservableBean {
     }
     String oldValue = this.barva;
     this.barva = barva;
-    pcs.firePropertyChange("barva", oldValue, barva);
+    pcs.firePropertyChange("Oblíbená barva", oldValue, barva);
+  }
+
+  private String prezdivka;
+
+  public void setPrezdivka(String prezdivka) {
+    this.prezdivka = prezdivka;
   }
 
   public String getPrezdivka() {

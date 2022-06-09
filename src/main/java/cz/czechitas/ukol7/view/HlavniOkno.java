@@ -38,10 +38,22 @@ public class HlavniOkno extends JFrame {
             .textField("prezdivka")
             .add();
 
+      formBuilder
+              .label("&Barva")
+              .comboBox("oblíbená barva", PreferenceController.PREZDIVKA)
+              .add("span");
+
     formBuilder
-            .label("&Barva")
-            .textField("barva")
-            .add();
+            .panel(panel -> {
+              JButton novyButton = new JButton(controller.getNovyAction());
+              JButton ulozitButton = new JButton(controller.getUlozitAction());
+
+              getRootPane().setDefaultButton(ulozitButton);
+
+              panel.add(novyButton);
+              panel.add(ulozitButton);
+            })
+            .add("right, span");
     pack();
   }
 

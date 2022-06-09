@@ -11,12 +11,12 @@ import java.util.List;
 
 public class PreferenceController {
   private final PresentationModel<BarvaBean> model;
-  private final Action novyAction;
+  private Action novyAction;
   private final Action ulozitAction;
-  private final String text;
 
-  public PreferenceController(String text, Action novyAction) {
-    this.text = text;
+  public Action getNovyAction() { return novyAction; }
+
+  public PreferenceController() {
     this.novyAction = novyAction;
     model = new PresentationModel<>(new BarvaBean());
     ulozitAction = ActionBuilder.create("&Uložit", this::handleUlozit);
@@ -28,7 +28,7 @@ public class PreferenceController {
     BarvaBean bean = this.model.getBean();
     System.out.println("-- Ukládám data --");
     System.out.printf("Přezdívka: %s", bean.getPrezdivka()).println();
-    System.out.printf("Oblíbená barva: %s", bean.getBarva()).println();
+    System.out.printf("Oblíbená barva : %s", bean.getBarva()).println();
   }
 
   private void handlePropertyChange(PropertyChangeEvent propertyChangeEvent) {
@@ -37,10 +37,6 @@ public class PreferenceController {
 
   public PresentationModel<BarvaBean> getModel() {
     return model;
-  }
-
-  public Action getNovyAction() {
-    return novyAction;
   }
 
   public Action getUlozitAction() {
