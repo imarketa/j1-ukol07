@@ -4,14 +4,11 @@ import com.jgoodies.binding.beans.ExtendedPropertyChangeSupport;
 import com.jgoodies.common.bean.ObservableBean;
 
 import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 /**
  * JavaBean s údaji o barvě.
  */
-public class BarvaBean implements ObservableBean {
+public class ModelBean implements ObservableBean {
   private final ExtendedPropertyChangeSupport pcs = new ExtendedPropertyChangeSupport(this);
 
   private String barva;
@@ -26,7 +23,7 @@ public class BarvaBean implements ObservableBean {
     }
     String oldValue = this.barva;
     this.barva = barva;
-    pcs.firePropertyChange("Oblíbená barva", oldValue, barva);
+    pcs.firePropertyChange("barva", oldValue, barva);
   }
 
   private String prezdivka;

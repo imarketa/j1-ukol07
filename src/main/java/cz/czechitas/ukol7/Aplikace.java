@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class Aplikace {
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         FlatLightLaf.setup();
         new HlavniOkno(new PreferenceController()).start();
     }

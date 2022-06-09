@@ -2,7 +2,7 @@ package cz.czechitas.ukol7.controller;
 
 import com.jgoodies.binding.PresentationModel;
 import cz.czechitas.ukol7.formbuilder.ActionBuilder;
-import cz.czechitas.ukol7.model.BarvaBean;
+import cz.czechitas.ukol7.model.ModelBean;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PreferenceController {
-  private final PresentationModel<BarvaBean> model;
+  private final PresentationModel<ModelBean> model;
   private Action novyAction;
   private final Action ulozitAction;
 
@@ -18,24 +18,24 @@ public class PreferenceController {
 
   public PreferenceController() {
     this.novyAction = novyAction;
-    model = new PresentationModel<>(new BarvaBean());
+    model = new PresentationModel<>(new ModelBean());
     ulozitAction = ActionBuilder.create("&Uložit", this::handleUlozit);
     model.addBeanPropertyChangeListener(this::handlePropertyChange);
     vypoctiStavAkci();
   }
 
   private void handleUlozit() {
-    BarvaBean bean = this.model.getBean();
+    ModelBean bean = this.model.getBean();
     System.out.println("-- Ukládám data --");
     System.out.printf("Přezdívka: %s", bean.getPrezdivka()).println();
-    System.out.printf("Oblíbená barva : %s", bean.getBarva()).println();
+    System.out.printf("Barva : %s", bean.getBarva()).println();
   }
 
   private void handlePropertyChange(PropertyChangeEvent propertyChangeEvent) {
     vypoctiStavAkci();
   }
 
-  public PresentationModel<BarvaBean> getModel() {
+  public PresentationModel<ModelBean> getModel() {
     return model;
   }
 
@@ -44,13 +44,13 @@ public class PreferenceController {
   }
 
   private void vypoctiStavAkci() {
-    BarvaBean osoba = model.getBean();
+    ModelBean osoba = model.getBean();
     boolean enabled = osoba.getBarva() != null && osoba.getPrezdivka() != null;
     ulozitAction.setEnabled(enabled);
   }
 
   public void handleNovy() {
-    this.model.setBean(new BarvaBean());
+    this.model.setBean(new ModelBean());
   }
 
   public static final List<String> PREZDIVKA = Arrays.asList(
