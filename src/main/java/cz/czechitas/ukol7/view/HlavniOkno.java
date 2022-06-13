@@ -1,6 +1,7 @@
 package cz.czechitas.ukol7.view;
 
 import cz.czechitas.ukol7.Aplikace;
+import cz.czechitas.ukol7.controller.Barva;
 import cz.czechitas.ukol7.controller.PreferenceController;
 import cz.czechitas.ukol7.formbuilder.FormBuilder;
 import cz.czechitas.ukol7.formbuilder.FormBuilderWithContainer;
@@ -14,7 +15,7 @@ public class HlavniOkno extends JFrame {
     private final PreferenceController controller;
 
     public HlavniOkno(PreferenceController controller) throws HeadlessException {
-        super("Přezdívky a barvy");
+        super("Přezdívka a barva");
         this.controller = controller;
         this.init();
     }
@@ -34,27 +35,23 @@ public class HlavniOkno extends JFrame {
                 .container(this);
 
         formBuilder
-                .label("&Prezdivka")
+                .label("&Přezdívka")
                 .textField("prezdivka")
-                .add();
+                .add("left");
 
-        formBuilder
-                .label("&Barva")
-                .comboBox("barva", PreferenceController.PREZDIVKA)
-                .add();
+        for (Barva value: Barva.values()){
+            formBuilder
+                    .radioButton(value.getText(), "oblibenaBarva", value)
+                    .add("left, span");
+        }
 
         formBuilder
                 .panel(panel -> {
-                    JButton novyButton = new JButton(controller.getNovyAction());
                     JButton ulozitButton = new JButton(controller.getUlozitAction());
-
                     getRootPane().setDefaultButton(ulozitButton);
-
-                    panel.add(novyButton);
                     panel.add(ulozitButton);
                 })
                 .add("right, span");
         pack();
     }
-
 }
